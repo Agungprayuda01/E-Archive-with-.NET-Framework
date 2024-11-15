@@ -1,0 +1,66 @@
+﻿@model E_Archive.Models.Pegawai
+
+@{
+    ViewData["Title"] = "Input Data Pegawai";
+    var alertMessage = TempData["AlertMessage"] as string;
+}
+
+<h1>Input Data Pegawai</h1>
+
+<h4>Pegawai</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nik" class="control-label"></label>
+                <input asp-for="Nik" class="form-control" />
+                <span asp-validation-for="Nik" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Alamat" class="control-label"></label>
+                <input asp-for="Alamat" class="form-control" />
+                <span asp-validation-for="Alamat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tanggallahir" class="control-label"></label>
+                <input asp-for="Tanggallahir" type="date" class="form-control" />
+                <span asp-validation-for="Tanggallahir" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label"></label>
+                <input type="file" name="file" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<body>
+    <div class="container"> <!-- Your content here --> </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> @if (!string.IsNullOrEmpty(alertMessage))
+    {
+        <script type="text/javascript">$(document).ready(function () { Swal.fire({ title: 'Alert', text: '@alertMessage', icon: 'warning', confirmButtonText: 'OK' }); });</script>
+    }
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

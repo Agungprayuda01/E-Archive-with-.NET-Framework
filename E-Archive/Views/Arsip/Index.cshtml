@@ -1,0 +1,53 @@
+﻿@model IEnumerable<E_Archive.Models.Arsip>
+
+@{
+    ViewData["Title"] = "Arsip Pegawai";
+    var alertMessage = TempData["AlertMessage"] as string;
+}
+
+<h1>Arsip</h1>
+
+<p>
+    <a asp-action="Create">Upload Arsip</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PathArsip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Owner)
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                    <a href="@Url.Content("~/arsip/" + item.PathArsip)" class="btn btn-primary" target="_blank">View</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<body>
+    <div class="container"> <!-- Your content here --> </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> @if (!string.IsNullOrEmpty(alertMessage))
+    {
+        <script type="text/javascript">$(document).ready(function () { Swal.fire({ title: 'Alert', text: '@alertMessage', icon: 'warning', confirmButtonText: 'OK' }); });</script>
+    }
+</body>
